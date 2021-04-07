@@ -1,4 +1,18 @@
- 
+## ---------------------------
+##
+## Script name: 
+## Purpose of script:
+## Author: C. Scott Smith, PhD AICP
+## Date Created: 2021-04-07
+## Date Last Updated: 2021-04-07
+## Email: christopher.smith@cookcountyhealth.org
+## ---------------------------
+##
+## Notes:
+##   
+##
+## ---------------------------
+
 
 # Activate packages
 library(censusapi)
