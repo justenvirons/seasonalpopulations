@@ -1,0 +1,170 @@
+---
+title: "Estimation of CCDPH's Seasonal Populations"
+author: "C. Scott Smith, PhD AICP"
+date: "3/26/2021"
+output:
+  word_document:
+    reference_docx: StylesTemplate.docx
+    keep_md: true
+csl: chicago-author-date.csl
+bibliography: references.bib
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(censusapi)
+library(tigris) 
+library(tidyverse)
+library(tidyr)
+library(dplyr) 
+library(sf) 
+library(clipr)
+library(readxl)
+library(leaflet)
+library(scales)
+library(ggmap)
+library(data.table)
+library(XML)
+library(reshape2)
+library(ggplot2)
+
+# https://fishandwhistle.net/post/2020/getting-started-zotero-better-bibtex-rmarkdown/
+# https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html
+# https://www.zotero.org/styles
+# https://retorque.re/zotero-better-bibtex/installation/
+# https://retorque.re/zotero-better-bibtex/install.packages('tinytex')
+# install.packages('tinytex')
+# tinytex::install_tinytex()
+
+```
+
+## Temporary populations and public health planning
+
+As public health programs become more targeted toward specific
+population segments, there is a need to better understand the behaviors
+of temporary populations to increase intervention efficacy. Of
+particular concern here are the longer-term mobility patterns of
+seasonal residents, which have the potential to substantively alter the
+size and composition of Cook County Department of Public Health's
+(CCDPH) population at different times of the year. Accurate estimates of
+the size, distribution, timing and characteristics of temporary
+populations has been especially important for COVID-19 vaccination
+planning and programs, which require accurate counts of the size and
+locations of phase-specific priority groups. This article: (1) briefly
+summarizes some challenges associated with estimating seasonal
+populations; (2) proposes a methodology for counting seasonal
+residents--specifically 'snowbird' populations--using American Community
+Survey (ACS) data; and (3) applies the methodology to develop
+place-level counts of seasonal populations within the CCDPH
+jurisdiction.
+
+## Challenges with estimating temporary populations
+
+Temporarily occupied units are sample units occupied at the time of
+interview entirely by people who will be there for 2 months or less. At
+sample units where all the people are staying less than 2 months, the
+respondent is asked a subset of the questions from the housing section,
+including the question on vacancy status. The current residence concept
+is unique to the American Community Survey. By using the current
+residence to decide for whom to collect survey information, the ACS can
+provide a more accurate description of an area's social and economic
+characteristics. Most surveys, as well as the decennial census, use the
+concept of usual residence. Usual residence is defined as the place
+where a person lives and sleeps most of the time. The census defines
+everyone as having only one usual residence.
+
+## Methodology for estimating seasonal populations using ACS data
+
+In order to reduce the complexity of estimates, this methodology
+proposes, as an initial step, one particular group, snowbirds, seasonal
+residents.
+
+In order to develop a strategy for estimating seasonal populations
+within CCDPH, we first carried out a literature review. American
+Community Survey to derive estimates of the seasonal populations.
+
+## Seasonal population estimates for CCDPH
+
+Figure 1. Population pyramids, 2000 and 2019 Changes in the CCDPH
+jurisdiction's age composition
+
+```{r Population Pyramids, figures-side, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+fig01_pyramid_2010 %>% 
+  mutate(Age= factor(Age,levels = c("PopUnd5",
+                          "Pop5to9",
+                          "Pop10to14",
+                          "Pop15to19",
+                          "Pop20to24",
+                          "Pop25to29",
+                          "Pop30to34",
+                          "Pop35to39",
+                          "Pop40to44",
+                          "Pop45to49",
+                          "Pop50to54",
+                          "Pop55to59",
+                          "Pop60to64",
+                          "Pop65to69",
+                          "Pop70to74",
+                          "Pop75to79",
+                          "Pop80to84",
+                          "Pop85Over"))) %>%
+  ggplot(aes(x = Age, y = Population, fill = sex)) +
+  ggtitle("CCDPH Age Composition, 2010") +
+  geom_bar(stat = "identity", width = 0.85) + 
+  scale_y_continuous(limits= max(fig01_pyramid_2010$Population) * c(-1,1)) + 
+  scale_fill_manual(values=as.vector(c("grey45","grey63"))) +
+  coord_flip() +
+  labs(x="",y="",fill="") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+fig01_pyramid_2019 %>% 
+  mutate(Age= factor(Age,levels = c("PopUnd5",
+                          "Pop5to9",
+                          "Pop10to14",
+                          "Pop15to19",
+                          "Pop20to24",
+                          "Pop25to29",
+                          "Pop30to34",
+                          "Pop35to39",
+                          "Pop40to44",
+                          "Pop45to49",
+                          "Pop50to54",
+                          "Pop55to59",
+                          "Pop60to64",
+                          "Pop65to69",
+                          "Pop70to74",
+                          "Pop75to79",
+                          "Pop80to84",
+                          "Pop85Over"))) %>%
+  ggplot(aes(x = Age, y = Population, fill = sex)) +
+  ggtitle("CCDPH Age Composition, 2019") +
+  geom_bar(stat = "identity", width = 0.85) + 
+  scale_y_continuous(limits= max(fig01_pyramid_2010$Population) * c(-1,1)) + 
+  scale_fill_manual(values=as.vector(c("grey45","grey63"))) +
+  coord_flip() +
+  labs(x="",y="",fill="") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+Figure 2. Population 65 and older population in CCDPH, 2000-2019 (Table
+B01001 Population by Age, Sex) Trends in the population 65 and older
+population over time
+
+Figure 3. Mobility status of 65 and older population in CCDPH, 2000-2019
+(Table B01001 Population by Age, Sex) Trends in the population 65 and
+older population over time
+
+Figure 4. Seasonally vacant housing, 2000-2019 (Table B25005 VACANT -
+CURRENT RESIDENCE ELSEWHERE) (Table B25004 VACANCY STATUS)
+
+## Discussion
+
+## References

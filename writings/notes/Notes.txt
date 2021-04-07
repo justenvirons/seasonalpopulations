@@ -1,0 +1,11 @@
+https://www.socialexplorer.com/data/ACS2010/metadata/?ds=ACS10&var=B25004006
+
+https://www.nhpr.org/post/conducting-2020-census-during-pandemic#stream/0
+
+Question 25 on the ACS form, shown in Figure 8-4, was first added to the ACS in 2003 to collect more information on seasonal populations. It begins by asking whether any household member ìlive[s] or stay[s] at this address year roundî; follow-up questions are asked only if the answer is no (that is, everyone in the household is only a part-year resident at this location). The question may provide some insight on snowbird and sunbird residences, as well as other situations like groups of college students renting a house or apartment during the academic year. However, by its design, the question falls well short of being able to provide information on a fundamental underlying question: the extent to which individualsí ìcurrent residenceî coincides with their ìusual residence.î
+
+https://www.nap.edu/read/11727/chapter/10#262
+https://www.nap.edu/read/13895/chapter/11#152
+
+The continuous data collection of the ACS necessitates changes in variable definitions, sample weighting, and sizes:
+Å° Residency rules are different. The ACS defines a resident by a two-month rule. The census rule is "usual place of residence" or wherever a person spends most of the year. ACS data may include seasonal populations in addition to year-round residents.
